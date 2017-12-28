@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    {% block title %}
+        <title>secondpage-osw</title>
+    {% endblock %}
+
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #FFF8DC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #left-menu {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 70%;
+            background-color: #FFD39B;
+        }
+
+        a:hover, a:focus {
+            text-decoration: none
+        }
+
+        .left-nav ul li a {
+            margin-top: 30px;
+            color: gray;
+            display: block;
+            padding: 1em 5%;
+            /*border-top:1px solid #4f4f4f;
+            border-bottom:1px solid #292929;*/
+            transition: all 0.5s ease-out;
+            cursor: pointer;
+            text-align: center;
+            height: 60px;
+            line-height: 30px;
+            font-weight: bold;
+        }
+
+        .left-nav ul li a:hover {
+            background-color: #FFF8DC;
+            color: #000000;
+        }
+
+        .left-nav ul.ul-bottom li a {
+            margin-top: 60px;
+        }
+
+        .my-breadcrumb {
+            background-color: transparent;
+            margin-top: 20px;
+            padding-bottom: 0px;
+        }
+
+        .list-article-block {
+            height: 250px;
+        }
+
+        .list-article {
+            margin: 20px 30px 40px 30px;
+            height: 200px;
+            border: 0px solid #000000;
+            /*background: #ffffff;
+            border-radius: 25px;*/
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        .list-article-meta {
+            font-size: 10px;
+            margin-right: 10px;
+        }
+
+        nav .pagination li a {
+            background-color: transparent;
+        }
+
+        .right-second {
+            margin: 120px 0px 0px 50px;
+        }
+
+        .mobile-only {
+            margin: 30px 0 0 30px;
+        }
+
+        .mobile-only .dropdown-menu li a {
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .list-article {
+                font-size: 10px;
+            }
+            h4{
+                font-size: 16px;
+            }
+            .list-article-meta{
+                font-size: 6px;
+            }
+        }
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="row">
+    <div class="mobile-only hidden-md hidden-lg">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                    style="background-color: transparent;color: #8B4513;min-width: 200px">
+                <span style="font-weight: bold">点此展开</span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"
+                style="background-color: #FFD39B;min-width: 200px">
+                <li><a href="{% url 'osw_articlelist' 0 %}">全部文章</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'osw_articlelist' 3 %}">前端开发</a></li>
+                <li><a href="{% url 'osw_articlelist' 2 %}">后端开发</a></li>
+                <li><a href="{% url 'osw_articlelist' 1 %}">算法与数据结构</a></li>
+                <li><a href="{% url 'osw_articlelist' 4 %}">计算机网络</a></li>
+                <li><a href="{% url 'osw_articlelist' 5 %}">其它文章</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'osw_mainpage' %}">返回首页</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-3 hidden-xs hidden-sm">
+        <div id="left-menu" class="left-nav">
+            <img src="/static/img/coffee-shouhui.jpg" style="width: 100%;height: auto;">
+            <ul>
+                <li><a href="{% url 'osw_articlelist' 0 %}">全部文章</a></li>
+                <li><a href="{% url 'osw_articlelist' 3 %}">前端开发</a></li>
+                <li><a href="{% url 'osw_articlelist' 2 %}">后端开发</a></li>
+                <li><a href="{% url 'osw_articlelist' 1 %}">算法与数据结构</a></li>
+                <li><a href="{% url 'osw_articlelist' 4 %}">网络</a></li>
+                <li><a href="{% url 'osw_articlelist' 5 %}">其它文章</a></li>
+            </ul>
+            <ul class="ul-bottom">
+                <li><a href="{% url 'osw_mainpage' %}">返回首页</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        {% block breadcrumb %}
+            <ol class="breadcrumb my-breadcrumb">
+                <li><a href="#">首页</a></li>
+                <li class="active">XXXXXX</li>
+            </ol>
+        {% endblock %}
+        {% block articlelist %}
+            <hr style="background-color:#FFD39B ;height:2px"/>
+            <div class="list-article-block">
+                <div class="list-article">
+                    <h4 style="font-weight: bold">命名数据网络与TCP/IP网络融合部署</h4><br/>
+                    <p>
+                        命名数据网络（Named-data-Network）是作为未来网络的架构被提出的，其目的是解决基于主机的TCP/IP网面临的诸多问题。然而，随着NDN架构研究的不断深入，目前面临着实际部署的问题。在实际部署时，想要直接用NDN架构完全代替现有的TCP/IP网络架构是不现实的，一方面，现在的TCP/IP网络已经非常成熟，网络结构的变革无法轻易实现，且这也涉及到方方面面的利益；另一方面，目前的NDN架构虽然日趋完善，但还远远没有达到实际商用的水平，还没有经过足够的实际网络流量的测试。因此，研究NDN网络与TCP/IP网络的融合问题是网络架构演进的重要一步，这对于未来网站的发展与变革有着重要的意义。
+                        信息中心网络（ICN）是一种面向内容的新型网络架构，而其中最具代表性的当属命名数据网络（NDN），本文就将以NDN架构为基础展开讨论[3]。
+                        NDN中的通信由接收者发起，通过两种类型的包来完成：兴趣（Interest）包和数据（Data）包，其中Interest包用来请求数据，Data包用来响应被请求的数据，Interest包和Data包通过名字进行匹配，且一个Interest包至多只能匹配一个Data，因此过大的数据就需要连续发送数个Interest包来请求，此外，未经请求的Data包不允许在NDN网中传送，这为安全性提供了一定保障。为了实现NDN的基于命名的寻址转发，NDN网内的每个节点都维护着三张表：PIT、FIB、CS。PIT记录了每一个通过该节点的Interest包及其对应的出入接口；FIB通过名字匹配为Interest包的转发提供依据；CS实现了网内节点缓存。当用户想要获取数据时，首先发送一个Interest包，当其到达某个NDN节点时，先查询CS中是否有匹配的数据，若有则立刻返回该数据，否则去查询PIT表中是否有匹配条目，若有则将Interest包进入的接口添加到该PIT条目中并将此包丢弃以节约带宽，如果PIT表中也没有匹配，则根据FIB中的信息决定从哪个接口转发出去，并在PIT中新建对应的条目。当请求最终转发至数据源时，响应的数据根据PIT沿原路返回，每经过一个节点都要删除对应的PIT表项并决定是否需要缓存至CS以满足后续相同请求。
+                        与传统IP网相比，NDN的优势主要体现在：一、命名机制。NDN采用类似于URL的分层式命名方法，可以有效聚合，且解耦了身份与地址双重身份，命名可直接与内容的属性相关，解决了IP网按地址寻址无法对内容进行有效识别、存储复用的缺陷；二、网内缓存。NDN支持在每个路由节点设置缓存以实现内容的快速分发；三、NDN直接对内容本身进行加密或签名，这就使得接收方无需考虑内容来自于哪里，有利于网内缓存的实现。
+                    </p>
+                </div>
+                <span class="list-article-meta" style="margin-left: 30px;">阅读次数(3)</span>
+                <span class="list-article-meta">创建时间（XXXX-XX-XX）</span>
+                <span class="list-article-meta" style="float: right"><a href="#">阅读全文</a></span>
+            </div>
+            <hr style="background-color:#FFD39B ;height:2px"/>
+            <div class="list-article-block">
+                <div class="list-article">
+                    <h4 style="font-weight: bold">命名数据网络与TCP/IP网络融合部署</h4><br/>
+                    <p>
+                        命名数据网络（Named-data-Network）是作为未来网络的架构被提出的，其目的是解决基于主机的TCP/IP网面临的诸多问题。然而，随着NDN架构研究的不断深入，目前面临着实际部署的问题。在实际部署时，想要直接用NDN架构完全代替现有的TCP/IP网络架构是不现实的，一方面，现在的TCP/IP网络已经非常成熟，网络结构的变革无法轻易实现，且这也涉及到方方面面的利益；另一方面，目前的NDN架构虽然日趋完善，但还远远没有达到实际商用的水平，还没有经过足够的实际网络流量的测试。因此，研究NDN网络与TCP/IP网络的融合问题是网络架构演进的重要一步，这对于未来网站的发展与变革有着重要的意义。
+                        信息中心网络（ICN）是一种面向内容的新型网络架构，而其中最具代表性的当属命名数据网络（NDN），本文就将以NDN架构为基础展开讨论[3]。
+                        NDN中的通信由接收者发起，通过两种类型的包来完成：兴趣（Interest）包和数据（Data）包，其中Interest包用来请求数据，Data包用来响应被请求的数据，Interest包和Data包通过名字进行匹配，且一个Interest包至多只能匹配一个Data，因此过大的数据就需要连续发送数个Interest包来请求，此外，未经请求的Data包不允许在NDN网中传送，这为安全性提供了一定保障。为了实现NDN的基于命名的寻址转发，NDN网内的每个节点都维护着三张表：PIT、FIB、CS。PIT记录了每一个通过该节点的Interest包及其对应的出入接口；FIB通过名字匹配为Interest包的转发提供依据；CS实现了网内节点缓存。当用户想要获取数据时，首先发送一个Interest包，当其到达某个NDN节点时，先查询CS中是否有匹配的数据，若有则立刻返回该数据，否则去查询PIT表中是否有匹配条目，若有则将Interest包进入的接口添加到该PIT条目中并将此包丢弃以节约带宽，如果PIT表中也没有匹配，则根据FIB中的信息决定从哪个接口转发出去，并在PIT中新建对应的条目。当请求最终转发至数据源时，响应的数据根据PIT沿原路返回，每经过一个节点都要删除对应的PIT表项并决定是否需要缓存至CS以满足后续相同请求。
+                        与传统IP网相比，NDN的优势主要体现在：一、命名机制。NDN采用类似于URL的分层式命名方法，可以有效聚合，且解耦了身份与地址双重身份，命名可直接与内容的属性相关，解决了IP网按地址寻址无法对内容进行有效识别、存储复用的缺陷；二、网内缓存。NDN支持在每个路由节点设置缓存以实现内容的快速分发；三、NDN直接对内容本身进行加密或签名，这就使得接收方无需考虑内容来自于哪里，有利于网内缓存的实现。
+                    </p>
+                </div>
+                <span class="list-article-meta" style="margin-left: 30px;">阅读次数(3)</span>
+                <span class="list-article-meta">创建时间（XXXX-XX-XX）</span>
+                <span class="list-article-meta" style="float: right"><a href="#">阅读全文</a></span>
+            </div>
+            <hr style="background-color:#FFD39B ;height:2px"/>
+            <div class="list-article-block">
+                <div class="list-article">
+                    <h4 style="font-weight: bold">命名数据网络与TCP/IP网络融合部署</h4><br/>
+                    <p>
+                        命名数据网络（Named-data-Network）是作为未来网络的架构被提出的，其目的是解决基于主机的TCP/IP网面临的诸多问题。然而，随着NDN架构研究的不断深入，目前面临着实际部署的问题。在实际部署时，想要直接用NDN架构完全代替现有的TCP/IP网络架构是不现实的，一方面，现在的TCP/IP网络已经非常成熟，网络结构的变革无法轻易实现，且这也涉及到方方面面的利益；另一方面，目前的NDN架构虽然日趋完善，但还远远没有达到实际商用的水平，还没有经过足够的实际网络流量的测试。因此，研究NDN网络与TCP/IP网络的融合问题是网络架构演进的重要一步，这对于未来网站的发展与变革有着重要的意义。
+                        信息中心网络（ICN）是一种面向内容的新型网络架构，而其中最具代表性的当属命名数据网络（NDN），本文就将以NDN架构为基础展开讨论[3]。
+                        NDN中的通信由接收者发起，通过两种类型的包来完成：兴趣（Interest）包和数据（Data）包，其中Interest包用来请求数据，Data包用来响应被请求的数据，Interest包和Data包通过名字进行匹配，且一个Interest包至多只能匹配一个Data，因此过大的数据就需要连续发送数个Interest包来请求，此外，未经请求的Data包不允许在NDN网中传送，这为安全性提供了一定保障。为了实现NDN的基于命名的寻址转发，NDN网内的每个节点都维护着三张表：PIT、FIB、CS。PIT记录了每一个通过该节点的Interest包及其对应的出入接口；FIB通过名字匹配为Interest包的转发提供依据；CS实现了网内节点缓存。当用户想要获取数据时，首先发送一个Interest包，当其到达某个NDN节点时，先查询CS中是否有匹配的数据，若有则立刻返回该数据，否则去查询PIT表中是否有匹配条目，若有则将Interest包进入的接口添加到该PIT条目中并将此包丢弃以节约带宽，如果PIT表中也没有匹配，则根据FIB中的信息决定从哪个接口转发出去，并在PIT中新建对应的条目。当请求最终转发至数据源时，响应的数据根据PIT沿原路返回，每经过一个节点都要删除对应的PIT表项并决定是否需要缓存至CS以满足后续相同请求。
+                        与传统IP网相比，NDN的优势主要体现在：一、命名机制。NDN采用类似于URL的分层式命名方法，可以有效聚合，且解耦了身份与地址双重身份，命名可直接与内容的属性相关，解决了IP网按地址寻址无法对内容进行有效识别、存储复用的缺陷；二、网内缓存。NDN支持在每个路由节点设置缓存以实现内容的快速分发；三、NDN直接对内容本身进行加密或签名，这就使得接收方无需考虑内容来自于哪里，有利于网内缓存的实现。
+                    </p>
+                </div>
+                <span class="list-article-meta" style="margin-left: 30px;">阅读次数(3)</span>
+                <span class="list-article-meta">创建时间（XXXX-XX-XX）</span>
+                <span class="list-article-meta" style="float: right"><a href="#">阅读全文</a></span>
+            </div>
+            <hr style="background-color:#FFD39B ;height:2px"/>
+            <div class="list-article-block">
+                <div class="list-article">
+                    <h4 style="font-weight: bold">命名数据网络与TCP/IP网络融合部署</h4><br/>
+                    <p>
+                        命名数据网络（Named-data-Network）是作为未来网络的架构被提出的，其目的是解决基于主机的TCP/IP网面临的诸多问题。然而，随着NDN架构研究的不断深入，目前面临着实际部署的问题。在实际部署时，想要直接用NDN架构完全代替现有的TCP/IP网络架构是不现实的，一方面，现在的TCP/IP网络已经非常成熟，网络结构的变革无法轻易实现，且这也涉及到方方面面的利益；另一方面，目前的NDN架构虽然日趋完善，但还远远没有达到实际商用的水平，还没有经过足够的实际网络流量的测试。因此，研究NDN网络与TCP/IP网络的融合问题是网络架构演进的重要一步，这对于未来网站的发展与变革有着重要的意义。
+                        信息中心网络（ICN）是一种面向内容的新型网络架构，而其中最具代表性的当属命名数据网络（NDN），本文就将以NDN架构为基础展开讨论[3]。
+                        NDN中的通信由接收者发起，通过两种类型的包来完成：兴趣（Interest）包和数据（Data）包，其中Interest包用来请求数据，Data包用来响应被请求的数据，Interest包和Data包通过名字进行匹配，且一个Interest包至多只能匹配一个Data，因此过大的数据就需要连续发送数个Interest包来请求，此外，未经请求的Data包不允许在NDN网中传送，这为安全性提供了一定保障。为了实现NDN的基于命名的寻址转发，NDN网内的每个节点都维护着三张表：PIT、FIB、CS。PIT记录了每一个通过该节点的Interest包及其对应的出入接口；FIB通过名字匹配为Interest包的转发提供依据；CS实现了网内节点缓存。当用户想要获取数据时，首先发送一个Interest包，当其到达某个NDN节点时，先查询CS中是否有匹配的数据，若有则立刻返回该数据，否则去查询PIT表中是否有匹配条目，若有则将Interest包进入的接口添加到该PIT条目中并将此包丢弃以节约带宽，如果PIT表中也没有匹配，则根据FIB中的信息决定从哪个接口转发出去，并在PIT中新建对应的条目。当请求最终转发至数据源时，响应的数据根据PIT沿原路返回，每经过一个节点都要删除对应的PIT表项并决定是否需要缓存至CS以满足后续相同请求。
+                        与传统IP网相比，NDN的优势主要体现在：一、命名机制。NDN采用类似于URL的分层式命名方法，可以有效聚合，且解耦了身份与地址双重身份，命名可直接与内容的属性相关，解决了IP网按地址寻址无法对内容进行有效识别、存储复用的缺陷；二、网内缓存。NDN支持在每个路由节点设置缓存以实现内容的快速分发；三、NDN直接对内容本身进行加密或签名，这就使得接收方无需考虑内容来自于哪里，有利于网内缓存的实现。
+                    </p>
+                </div>
+                <span class="list-article-meta" style="margin-left: 30px;">阅读次数(3)</span>
+                <span class="list-article-meta">创建时间（XXXX-XX-XX）</span>
+                <span class="list-article-meta" style="float: right"><a href="#">阅读全文</a></span>
+            </div>
+            <hr style="background-color:#FFD39B ;height:2px"/>
+            <div class="list-article-block">
+                <div class="list-article">
+                    <h4 style="font-weight: bold">命名数据网络与TCP/IP网络融合部署</h4><br/>
+                    <p>
+                        命名数据网络（Named-data-Network）是作为未来网络的架构被提出的，其目的是解决基于主机的TCP/IP网面临的诸多问题。然而，随着NDN架构研究的不断深入，目前面临着实际部署的问题。在实际部署时，想要直接用NDN架构完全代替现有的TCP/IP网络架构是不现实的，一方面，现在的TCP/IP网络已经非常成熟，网络结构的变革无法轻易实现，且这也涉及到方方面面的利益；另一方面，目前的NDN架构虽然日趋完善，但还远远没有达到实际商用的水平，还没有经过足够的实际网络流量的测试。因此，研究NDN网络与TCP/IP网络的融合问题是网络架构演进的重要一步，这对于未来网站的发展与变革有着重要的意义。
+                        信息中心网络（ICN）是一种面向内容的新型网络架构，而其中最具代表性的当属命名数据网络（NDN），本文就将以NDN架构为基础展开讨论[3]。
+                        NDN中的通信由接收者发起，通过两种类型的包来完成：兴趣（Interest）包和数据（Data）包，其中Interest包用来请求数据，Data包用来响应被请求的数据，Interest包和Data包通过名字进行匹配，且一个Interest包至多只能匹配一个Data，因此过大的数据就需要连续发送数个Interest包来请求，此外，未经请求的Data包不允许在NDN网中传送，这为安全性提供了一定保障。为了实现NDN的基于命名的寻址转发，NDN网内的每个节点都维护着三张表：PIT、FIB、CS。PIT记录了每一个通过该节点的Interest包及其对应的出入接口；FIB通过名字匹配为Interest包的转发提供依据；CS实现了网内节点缓存。当用户想要获取数据时，首先发送一个Interest包，当其到达某个NDN节点时，先查询CS中是否有匹配的数据，若有则立刻返回该数据，否则去查询PIT表中是否有匹配条目，若有则将Interest包进入的接口添加到该PIT条目中并将此包丢弃以节约带宽，如果PIT表中也没有匹配，则根据FIB中的信息决定从哪个接口转发出去，并在PIT中新建对应的条目。当请求最终转发至数据源时，响应的数据根据PIT沿原路返回，每经过一个节点都要删除对应的PIT表项并决定是否需要缓存至CS以满足后续相同请求。
+                        与传统IP网相比，NDN的优势主要体现在：一、命名机制。NDN采用类似于URL的分层式命名方法，可以有效聚合，且解耦了身份与地址双重身份，命名可直接与内容的属性相关，解决了IP网按地址寻址无法对内容进行有效识别、存储复用的缺陷；二、网内缓存。NDN支持在每个路由节点设置缓存以实现内容的快速分发；三、NDN直接对内容本身进行加密或签名，这就使得接收方无需考虑内容来自于哪里，有利于网内缓存的实现。
+                    </p>
+                </div>
+                <span class="list-article-meta" style="margin-left: 30px;">阅读次数(3)</span>
+                <span class="list-article-meta">创建时间（XXXX-XX-XX）</span>
+                <span class="list-article-meta" style="float: right"><a href="#">阅读全文</a></span>
+            </div>
+            <hr style="background-color:#FFD39B ;height:2px"/>
+            <div class="list-article-block">
+                <div class="list-article">
+                    <h4 style="font-weight: bold">命名数据网络与TCP/IP网络融合部署</h4><br/>
+                    <p>
+                        命名数据网络（Named-data-Network）是作为未来网络的架构被提出的，其目的是解决基于主机的TCP/IP网面临的诸多问题。然而，随着NDN架构研究的不断深入，目前面临着实际部署的问题。在实际部署时，想要直接用NDN架构完全代替现有的TCP/IP网络架构是不现实的，一方面，现在的TCP/IP网络已经非常成熟，网络结构的变革无法轻易实现，且这也涉及到方方面面的利益；另一方面，目前的NDN架构虽然日趋完善，但还远远没有达到实际商用的水平，还没有经过足够的实际网络流量的测试。因此，研究NDN网络与TCP/IP网络的融合问题是网络架构演进的重要一步，这对于未来网站的发展与变革有着重要的意义。
+                        信息中心网络（ICN）是一种面向内容的新型网络架构，而其中最具代表性的当属命名数据网络（NDN），本文就将以NDN架构为基础展开讨论[3]。
+                        NDN中的通信由接收者发起，通过两种类型的包来完成：兴趣（Interest）包和数据（Data）包，其中Interest包用来请求数据，Data包用来响应被请求的数据，Interest包和Data包通过名字进行匹配，且一个Interest包至多只能匹配一个Data，因此过大的数据就需要连续发送数个Interest包来请求，此外，未经请求的Data包不允许在NDN网中传送，这为安全性提供了一定保障。为了实现NDN的基于命名的寻址转发，NDN网内的每个节点都维护着三张表：PIT、FIB、CS。PIT记录了每一个通过该节点的Interest包及其对应的出入接口；FIB通过名字匹配为Interest包的转发提供依据；CS实现了网内节点缓存。当用户想要获取数据时，首先发送一个Interest包，当其到达某个NDN节点时，先查询CS中是否有匹配的数据，若有则立刻返回该数据，否则去查询PIT表中是否有匹配条目，若有则将Interest包进入的接口添加到该PIT条目中并将此包丢弃以节约带宽，如果PIT表中也没有匹配，则根据FIB中的信息决定从哪个接口转发出去，并在PIT中新建对应的条目。当请求最终转发至数据源时，响应的数据根据PIT沿原路返回，每经过一个节点都要删除对应的PIT表项并决定是否需要缓存至CS以满足后续相同请求。
+                        与传统IP网相比，NDN的优势主要体现在：一、命名机制。NDN采用类似于URL的分层式命名方法，可以有效聚合，且解耦了身份与地址双重身份，命名可直接与内容的属性相关，解决了IP网按地址寻址无法对内容进行有效识别、存储复用的缺陷；二、网内缓存。NDN支持在每个路由节点设置缓存以实现内容的快速分发；三、NDN直接对内容本身进行加密或签名，这就使得接收方无需考虑内容来自于哪里，有利于网内缓存的实现。
+                    </p>
+                </div>
+                <span class="list-article-meta" style="margin-left: 30px;">阅读次数(3)</span>
+                <span class="list-article-meta">创建时间（XXXX-XX-XX）</span>
+                <span class="list-article-meta" style="float: right"><a href="#">阅读全文</a></span>
+            </div>
+            <hr style="background-color:#FFD39B ;height:2px"/>
+        {% endblock %}
+        {% block pagenavigation %}
+            <div style="text-align: center">
+                <nav aria-label="Page navigation">
+                    <ul class="pager">
+                        <li class="previous"><a href="#" style="background-color: transparent"><span aria-hidden="true">&larr;</span>上一页</a>
+                        </li>
+                        <li class="next"><a href="#" style="background-color: transparent">下一页<span aria-hidden="true">&rarr;</span></a>
+                        </li>
+                    </ul>
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        {% endblock %}
+    </div>
+    <div class="col-md-3">
+        {% block labels %}
+           <div class="right-second">
+            <p style="font-size: 20px; font-weight: bold;">标签</p><br/>
+            <div style="margin-right: 50px;">
+                <button type="button" class="btn btn-default"
+                        style="background-color: #2aabd2; margin: 10px 10px 10px 0px;">001
+                </button>
+                <button type="button" class="btn btn-default"
+                        style="background-color: #f7e1b5; margin: 10px 10px 10px 0px;">002
+                </button>
+                <button type="button" class="btn btn-default"
+                        style="background-color: #d43f3a; margin: 10px 10px 10px 0px;">Default
+                </button>
+                <button type="button" class="btn btn-default"
+                        style="background-color: #67b168; margin: 10px 10px 10px 0px;">Defaultrrrrr
+                </button>
+                <button type="button" class="btn btn-default"
+                        style="background-color: #31708f; margin: 10px 10px 10px 0px;">Default
+                </button>
+                <button type="button" class="btn btn-default"
+                        style="background-color: #843534; margin: 10px 10px 10px 0px;">Default
+                </button>
+                <button type="button" class="btn btn-default"
+                        style="background-color: #d0e9c6; margin: 10px 10px 10px 0px;">Defaultgggggggg
+                </button>
+                <button type="button" class="btn btn-default"
+                        style="background-color: #ebccd1; margin: 10px 10px 10px 0px;">Default
+                </button>
+                <button type="button" class="btn btn-default"
+                        style="background-color: #d58512; margin: 10px 10px 10px 0px;">Defaultwwwww445
+                </button>
+
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+
+<footer style="margin-top: 20px"><p></p></footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/jquery/jquery-3.2.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/static/js/bootstrap.min.js"></script>
+
+{% block javascriptcode %}
+<script>
+</script>
+{% endblock %}
+
+</body>
+</html>

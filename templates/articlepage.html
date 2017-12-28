@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    {% block title %}
+        <title>articlepage-osw</title>
+    {% endblock %}
+
+
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #FFF8DC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #left-menu {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 70%;
+            background-color: #FFD39B;
+        }
+
+        a:hover, a:focus {
+            text-decoration: none
+        }
+
+        .left-nav ul li a {
+            margin-top: 30px;
+            color: gray;
+            display: block;
+            padding: 1em 5%;
+            /*border-top:1px solid #4f4f4f;
+            border-bottom:1px solid #292929;*/
+            transition: all 0.5s ease-out;
+            cursor: pointer;
+            text-align: center;
+            height: 60px;
+            line-height: 30px;
+            font-weight: bold;
+        }
+
+        .left-nav ul li a:hover {
+            background-color: #FFF8DC;
+            color: #000000;
+        }
+
+        .left-nav ul.ul-bottom li a {
+            margin-top: 60px;
+        }
+
+        .my-breadcrumb {
+            background-color: transparent;
+            margin-top: 20px;
+            padding-bottom: 0px;
+        }
+
+        .right-second {
+            margin: 120px 0px 0px 50px;
+        }
+
+        .article-body {
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+            line-height: 200%;
+        }
+
+        .mobile-only {
+            margin: 30px 0 0 30px;
+        }
+
+        .mobile-only .dropdown-menu li a {
+            font-weight: bold;
+        }
+
+        .contact-me {
+            margin-top: 50px;
+        }
+
+        @media only screen and (max-width: 768px){
+            h3{
+                font-size: 16px;
+                font-weight: bold;
+            }
+            p.article-body{
+                font-size: 14px;
+            }
+        }
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="row">
+    <div class="mobile-only hidden-md hidden-lg">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                    style="background-color: transparent;color: #8B4513;min-width: 200px">
+                <span style="font-weight: bold">点此展开</span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"
+                style="background-color: #FFD39B;min-width: 200px">
+                <li><a href="{% url 'osw_articlelist' 0 %}">全部文章</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'osw_articlelist' 3 %}">前端开发</a></li>
+                <li><a href="{% url 'osw_articlelist' 2 %}">后端开发</a></li>
+                <li><a href="{% url 'osw_articlelist' 1 %}">算法与数据结构</a></li>
+                <li><a href="{% url 'osw_articlelist' 4 %}">计算机网络</a></li>
+                <li><a href="{% url 'osw_articlelist' 5 %}">其它文章</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'osw_mainpage' %}">返回首页</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-3 hidden-xs hidden-sm">
+        <div id="left-menu" class="left-nav">
+            <img src="/static/img/coffee-shouhui.jpg" style="width: 100%;height: auto;">
+            <ul>
+                <li><a href="{% url 'osw_articlelist' 0 %}">全部文章</a></li>
+                <li><a href="{% url 'osw_articlelist' 3 %}">前端开发</a></li>
+                <li><a href="{% url 'osw_articlelist' 2 %}">后端开发</a></li>
+                <li><a href="{% url 'osw_articlelist' 1 %}">算法与数据结构</a></li>
+                <li><a href="{% url 'osw_articlelist' 4 %}">网络</a></li>
+                <li><a href="{% url 'osw_articlelist' 5 %}">其它文章</a></li>
+            </ul>
+            <ul class="ul-bottom">
+                <li><a href="{% url 'osw_mainpage' %}">返回首页</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        {% block breadcrumb %}
+            <ol class="breadcrumb my-breadcrumb">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">XXXXXX</a></li>
+                <li class="active">XXXXXX</li>
+            </ol>
+        {% endblock %}
+        <hr style="background-color:#FFD39B ;height:2px"/>
+        {% block articlebody %}
+            <div class="article-body">
+                <p style="text-align: left;font-size: 14px;font-style: italic;"><a href="#">上一篇:XXXXXX</a></p>
+                <h3 style="text-align: center; margin: 30px 0px;">命名数据网络与TCP/IP网络融合部署</h3>
+                <div style="padding: 0 20px 20px 20px">
+                    <p style="text-indent: 2em">
+                        NDN架构的提出是为了满足网络日益增长的高效性和安全性需求，而现有的网络是基于IP的，任何NDN应用的部署都需要在满足NDN架构的要求的同时，兼容IP流量。现有的NDN的部署试验大部分都是部署在IP网的基础之上的，具体来说，NDN部署通常是以一种overlay的形式，一般部署在IP、TCP或者UDP之上，底层的IP、TCP或者UDP采用隧道的形式为上面NDN的传输提供支持，这种隧道的两端节点需要进行手动配置，也就是说，每当部署有变动时，这些配置就需要手动进行修改以保证新加入的NDN节点能够正常通信。不难发现，这种部署方式的缺点之一就是实现繁琐、可扩展性差。除此之外，NDN的底层依然依赖的是点对点的传输方式，这大大限制了NDN充分利用底层资源的能力，使得NDN很难完全发挥其相对于IP网的优势。
+                    </p>
+                    <p style="text-indent: 2em">
+                        为了解决这样的问题，可以考虑，是否有一种方法可以使得NDN的部署不再依赖于IP网，只有使NDN完全脱离IP网络而单独存在，才能完全发挥其以内容为中心带来的种种优势，也能同时简化部署的过程，提高可扩展性。
+                    </p>
+                    <p style="text-indent: 2em">
+                        在网络的融合部署中，需要三种类型的交换机来支持融合网络中报文的转发，第一种是双栈交换机（Dual-Stack
+                        switch），同时支持NDN包基于命名的转发和IP包基于地址的转发；第二种是传统的以太网交换机（Ethernet
+                        switch），仅支持传统IP网中基于地址的转发；第三种是NDN交换机（NDN switch），顾名思义，这种交换机仅仅支持NDN基于名字的转发。
+                    </p>
+                    <p style="text-indent: 2em">
+                        NDN是基于包的名字进行转发的，由于在这种部署方式中，NDN是直接部署在网络的MAC层之上，因此其包的转发实现需要直接靠MAC地址进行转发，类似于传统交换机中IP地址与MAC地址的映射机制，NDN的转发也采用类似的方法，即在支持NDN转发的交换机中存储有类似于下表中的映射表，根据数据包的命名前缀查询到对应的MAC地址来进行通信，MAC地址的发现机制可以采用类似于IP网中的做法。
+                        总的来说，这样的NDN与IP的混合部署的方式有几个优势。首先，正如前文所说，NDN得以独立于IP协议栈而存在，直接运行在以太网之上，可以充分发挥NDN网络的固有优势（如网内缓存、支持多播等）；其次，在传统的IP网络中，为了避免形成路由环路，会采用一种生成树协议（STP协议），这会导致部分链路不可用，而在NDN中由于可以在名字中加标识符来防止路由环路，可以不受此限制，因此在网络中增量部署NDN节点可以更加充分的利用底层的物理链路，使网络资源得到更加充分的利用。
+                        本节介绍的一种增量部署的NDN与IP网混合的方案是进行两网融合研究的新思路，它和网关结构的融合部署思路相比，从更底层入手，在充分发挥NDN特性和挖掘网络资源方面有明显优势。
+                    </p>
+                    <p style="text-indent: 2em">
+                        本章节介绍了命名数据网络（NDN）研究领域中关于将NDN网络和TCP/IP网络进行融合的相关研究。
+                        作为未来网络架构，NDN网络在部署的过程中必然会面临和现有TCP/IP网络并存的问题，因此有必要对NDN网络与TCP/IP网络的共存和演进进行深入的研究，以推进NDN网络的进一步发展。目前关于两网融合的研究已经取得了一些初步的进展，其中最主流的研究方案都是基于网关部署的方式，即通过边界网关连接两种不同的网络，在网关处进行协议的融合转换，主要包括了HTTP协议与NDN进行转换、TCP协议与NDN进行转换的思路，其中前者的相关研究更多，其前景也更好。此外，还有研究者提出了一种直接在MAC层上进行NDN的增量部署，来实现NDN与IP网的融合的思路。
+                        HTTP协议与NDN协议的转换研究受到了最广泛的关注，这主要是因为HTTP协议和NDN协议有诸多相似点，首先是以内容为中心的特点，HTTP是以请求的数据为中心进行通信的，这一点和NDN的根本思路是吻合的；其次是HTTP中的通信模式是请求者发送请求报文，服务器回复数据，这和NDN中的Interest-Data机制有着相同的形式。这两个主要的相似点导致HTTP和NDN协议的转换成为了网络融合中最首选的方案。但是此方案也存在一些问题，如两者的缓存机制有较大区别、CDN的部署导致匹配正确性的问题，为了保证较高的网络效率，转换中的命名规则还需要进行优化。
+                        TCP协议与NDN协议的转换是另一种实现方式。和HTTP协议的思路相比，这种方法有着适用性更广的优势，但是对于TCP协议，无论是端到端的语义，还是发送-确认的通信机制，都和NDN的思路有较大的出入，因此这种方案的实现会比较麻烦，甚至会以降低网络有效性或可靠性为代价，因此以目前的研究来看，这不是最优的解决思路。
+                        本章在最后还介绍了一种增量部署的方案。这种方案摆脱了传统的研究中NDN依赖于IP进行部署的原则，直接将NDN部署在MAC层之上，而且没有采用网关的结构，采用了逐步增加NDN节点的思路，这种方法可以更加充分的利用底层网络资源、充分发挥NDN的固有特性，是一种NDN/IP网络融合的新思路。
+                        从上文的分析可以知道，NDN与IP网的融合转换还有诸多亟待解决的问题。在未来的协议融合研究中，需要重点关注以下几个方面的问题：
+                        </br>
+                        第一、需要明确的是实现两网融合的目的，由于NDN固有的一些特性以及IP网存在的种种缺陷，将NDN和IP网融合可以利用NDN的固有优势来改善网络性能，也能为未来网络的演进提供一条道路，在实现两网融合的过程中，需要充分地去挖掘和利用新网络架构的重要特性而不是忽略他们，要使得这些新特性切实地发挥他们的作用，而不是简单地为了融合而加入这些特性；
+                        </br>第二、目前两网融合的方案中，在网络的哪一层进行转换还没有定论，考虑在哪一层进行融合转换也是未来需要着重考虑的问题；
+                        </br>第三、关于融合转换的形式。基于网关的部署方式和混合部署方式在未来研究中都值得深入探讨。
+                    </p>
+                    <p style="text-indent: 2em">
+                        考虑到NDN协议在设计时可以作为网络层，也可以放在网络层之上，为了不再依赖于IP网而存在，可以尝试直接将NDN部署在以太网（Ethernet）之上，NDN中包的传输都以传统网络的二层数据链路层为基础，根据MAC地址直接进行转发，在通过这样的思路进行部署时，下面的几点需要注意：
+                        第一、
+                        尽管这样的部署方式使得NDN脱离了对IP的依赖，但是出于和现有IP网兼容的目的，部署后的网络需要同时支持NDN流量和IP流量，现有的IP网中的诸多机制包括IP寻址、以太网的生成树协议（STP）、MAC地址的发现机制、地址解析协议（ARP）等都要保留，需要实现的是一种NDN和IP的融合部署。
+                        第二、
+                        当然，部署后的网络需要完全支持以名字为基础的转发机制，而不是依赖隧道或是overlay的形式，在已部署的NDN节点之间，NDN的诸多机制如网内缓存、支持多播、转发策略等都应该能够正常实现。
+                        第三、
+                        关于部署的进程。部署的总体思路应该是逐步在IP网中增加支持的NDN的节点，考虑到局域网（LAN）的广泛使用以及其相对于广域网更易于部署，因此可以首先在局域网中进行这种增量部署的实验，在局域网中逐步增加NDN节点，随着部署进程的推进，会有越来越多的局域网支持NDN网络的通信，等到有了足够多的这样的局域网，再逐步将增量部署的进程从互联网的边缘推进到核心，直到完成整个部署工作，这是一个渐进的过程。
+                    </p>
+                </div>
+                <p style="text-align: left; font-size: 10px; margin: 10px 0;">XXXX-XX-XX</p>
+                <p style="text-align: right;font-size: 14px;font-style: italic;"><a href="#">下一篇:XXXXXX</a></p>
+            </div>
+
+        {% endblock %}
+    </div>
+    <div class="col-md-3">
+        {% block labels %}
+            <div class="right-second">
+                <p style="font-size: 20px; font-weight: bold;">标签</p><br/>
+                <div style="margin-right: 50px;">
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #2aabd2; margin: 10px 10px 10px 0px;">001
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #f7e1b5; margin: 10px 10px 10px 0px;">002
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #d43f3a; margin: 10px 10px 10px 0px;">Default
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #67b168; margin: 10px 10px 10px 0px;">Defaultrrrrr
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #31708f; margin: 10px 10px 10px 0px;">Default
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #843534; margin: 10px 10px 10px 0px;">Default
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #d0e9c6; margin: 10px 10px 10px 0px;">Defaultgggggggg
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #ebccd1; margin: 10px 10px 10px 0px;">Default
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            style="background-color: #d58512; margin: 10px 10px 10px 0px;">Defaultwwwww445
+                    </button>
+
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-5" style="margin: 0px 50px">
+        {% block form %}
+        <div class="contact-me">
+            <form class="form-horizontal" action="#" method="post">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">称呼
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="username" id="form-username"
+                               style="background-color: #FFEFD5" maxlength="20">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">邮箱
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" name="mailbox" id="form-mailbox"
+                               style="background-color: #FFEFD5">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">留言
+                    </label>
+                    <div class="col-sm-8">
+                                <textarea class="form-control" name="message" id="form-message"
+                                          style="height: 100px;background-color: #FFEFD5" maxlength="300">
+
+                                </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <button type="submit" class="btn btn-default" id="form-btn"
+                                style="background-color: #FFEFD5">提交</button>
+                    </div>
+                </div>
+                {% csrf_token %}
+            </form>
+        </div>
+        {% endblock %}
+    </div>
+    <div class="col-md-5"></div>
+</div>
+
+<footer style="margin-top: 20px"><p></p></footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/jquery/jquery-3.2.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/static/js/bootstrap.min.js"></script>
+
+
+
+{% block javascriptcode %}
+<script>
+</script>
+{% endblock %}
+</body>
+</html>

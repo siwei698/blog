@@ -1,0 +1,119 @@
+{% extends 'articlepage.html' %}
+
+{% block title %}
+    <title>文章详情页</title>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb my-breadcrumb">
+        <li><a href="{% url 'osw_mainpage' %}">首页</a></li>
+        <li><a href="{% url 'osw_articlelist' myarticle.category_id %}">{{ leixing.name }}</a></li>
+        <li class="active">{{ myarticle.title }}</li>
+    </ol>
+{% endblock %}
+
+{% block articlebody %}
+    <div class="article-body">
+        <p class="article-meta" style="text-align: left;font-size: 14px;font-style: italic;"><a href="{% url 'osw_article' previousarticle.id %}">上一篇:{{ previousarticle.title }}</a></p>
+        <h3 style="text-align: center; margin: 30px 0px;">{{ myarticle.title }}</h3>
+        <div style="padding: 0 20px 20px 20px">
+            <p class="article-body" style="text-indent: 2em">
+                {{ myarticle.content|safe }}
+            </p>
+        </div>
+        <p class="article-meta" style="text-align: left; font-size: 10px; margin: 10px 0;">{{ myarticle.created }}</p>
+        <p class="article-meta" style="text-align: right;font-size: 14px;font-style: italic;"><a href="{% url 'osw_article' nextarticle.id %}">下一篇:{{ nextarticle.title }}</a></p>
+    </div>
+{% endblock %}
+
+{% block labels %}
+    <div class="right-second">
+        <p style="font-size: 20px; font-weight: bold;">标签</p><br/>
+        <div style="margin-right: 50px;">
+            {% for tag in all_tags %}
+                <a href="{% url 'osw_taglist' tag.id %}">
+                    <button type="button" class="btn btn-default tag-button"
+                            style="margin: 10px 10px 10px 0px;background-color: #2aabd2">{{ tag.name }}
+                    </button>
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block form %}
+    <div class="contact-me" id="contact-me">
+        <form class="form-horizontal" action="/comment/{{ myarticle.id }}/" method="post">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">称呼
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="username" id="form-username"
+                           style="background-color: #FFEFD5" maxlength="20">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">邮箱
+                </label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" name="mailbox" id="form-mailbox"
+                           style="background-color: #FFEFD5">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">留言
+                </label>
+                <div class="col-sm-8">
+                                <textarea class="form-control" name="message" id="form-message"
+                                          style="height: 100px;background-color: #FFEFD5" maxlength="300">
+
+                                </textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-default" id="form-btn"
+                            style="background-color: #FFEFD5">提交
+                    </button>
+                </div>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascriptcode %}
+    <script>
+        $('#form-btn').on('click', function () {
+            var username = $("#form-username").val()
+            var mailbox = $("#form-mailbox").val()
+            var message = $("#form-message").val()
+            if (username == "" || mailbox == "" || message == "") {
+                alert("不能为空!")
+                return
+            }
+            else {
+                alert("已提交")
+                return
+            }
+        })
+
+        $(function () {
+            var tags = document.getElementsByClassName("tag-button");
+            for (i = 0; i < tags.length; i++) {
+                tags[i].style.backgroundColor = Color();
+            }
+
+            function Color() {
+                this.r = Math.floor(Math.random() * 255);
+                this.g = Math.floor(Math.random() * 255);
+                this.b = Math.floor(Math.random() * 255);
+                this.color = 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',0.8)';
+                return this.color;
+            }
+        });
+
+    </script>
+{% endblock %}
+

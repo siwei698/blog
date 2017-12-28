@@ -1,0 +1,118 @@
+{% extends 'homepage.html' %}
+
+{% block title %}
+    <title>主页</title>
+{% endblock %}
+
+{% block friendlylinks %}
+    <div class="right-first">
+        <p style="font-size: 20px; font-weight: bold;">友情链接</p><br/>
+        <ul class="list-unstyled">
+            <li><a href="http://getbootstrap.com/">Bootstrap官网</a></li>
+            <br/>
+            <li><a href="https://www.djangoproject.com/">Django官网</a></li>
+            <br/>
+            <li><a href="https://www.python.org/">Python官网</a></li>
+            <br/>
+            <li><a href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a></li>
+            <br/>
+            <li><a href="http://www.bupt.edu.cn/">北京邮电大学官网</a></li>
+            <br/>
+            <li><a href="https://www.imooc.com/">慕课网</a></li>
+            <br/>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block labels %}
+    <div class="right-second">
+        <p style="font-size: 20px; font-weight: bold;">标签</p><br/>
+        <div style="margin-right: 50px;">
+            {% for tag in all_tags %}
+                <a href="{% url 'osw_taglist' tag.id %}">
+                    <button type="button" class="btn btn-default tag-button"
+                            style="margin: 10px 10px 10px 0px;background-color: #2aabd2">{{ tag.name }}
+                    </button>
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block shouyewenzhang %}
+    <span class="glyphicon glyphicon-list article-list">&nbsp最近文章</span>
+    <hr style="background-color:#EE7600 ;height:2px"/>
+
+    {% for article in recent_article %}
+        <div class="article-firstpage">
+        <img class="firstpage-img hidden-sm hidden-xs" src="{{ MEDIA_URL }}{{ article.picture }}" width="200" height="200">
+        <p>
+            {{ article.abstract }}
+        </p>
+        </div>
+        <p class="readall"><a href="{% url 'osw_article' article.id %}">阅读全文</a>
+    </p>
+    <hr style="background-color:#EE7600 ;height:1px"/>
+    {% endfor %}
+
+
+
+{% endblock %}
+
+{% block javascriptcode %}
+    <script>
+    //顶部导航栏滚动效果
+        $(window).scroll(function () {
+            if ($(".navbar").offset().top > 50) {
+                $(".navbar-fixed-top").addClass("top-nav");
+            } else {
+                $(".navbar-fixed-top").removeClass("top-nav");
+            }
+        })
+
+    //表单提交的显示
+        $('#form-btn').on('click', function (){
+            var username = $("#form-username").val()
+            var mailbox = $("#form-mailbox").val()
+            var message = $("#form-message").val()
+            if(username == "" || mailbox == "" || message == ""){
+                alert("不能为空!")
+                return
+            }
+            else {
+                alert("已提交")
+                return
+            }
+        })
+
+    //站内搜索模块
+    $('#search-btn').on('click', function () {
+        var keywords = $('#search_keywords').val(),
+            request_url = '';
+        if(keywords == ""){
+            return
+        }
+        else{
+            request_url = "/search?keywords="+keywords
+        }
+        window.location.href = request_url
+    })
+
+    //标签部分颜色随机处理函数
+        $(function () {
+            var tags = document.getElementsByClassName("tag-button");
+            for (i = 0; i < tags.length; i++) {
+                tags[i].style.backgroundColor = Color();
+            }
+
+            function Color() {
+                this.r = Math.floor(Math.random() * 255);
+                this.g = Math.floor(Math.random() * 255);
+                this.b = Math.floor(Math.random() * 255);
+                this.color = 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',0.8)';
+                return this.color;
+            }
+        });
+    </script>
+{% endblock %}
