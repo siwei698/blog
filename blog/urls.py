@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'ckeditor/', include('ckeditor_uploader.urls')),
     #url(r'^homepage/', homepage),
-    url(r'^osw_mainpage/$', osw_mainpage, name="osw_mainpage"),
+    url(r'^$', osw_mainpage, name="osw_mainpage"),
     url(r'^media/(?P<path>.*)$',  serve, {"document_root":MEDIA_ROOT}),
     url(r'^articlelist/(?P<leixing>.*)/$', osw_articlelist, name="osw_articlelist"),
     url(r'^taglist/(?P<biaoqian>.*)/$', osw_taglist, name="osw_taglist"),

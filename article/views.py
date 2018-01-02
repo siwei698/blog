@@ -195,9 +195,9 @@ def Contact_function(request):
             contact_message.email = mail_box
             contact_message.content = me_ssage
             contact_message.save()
-            return HttpResponseRedirect('/osw_mainpage#contact-me')
+            return HttpResponseRedirect('/#contact-me')
         else:
-            return HttpResponseRedirect('/osw_mainpage#contact-me')
+            return HttpResponseRedirect('/#contact-me')
 
 #表单二（文章页）
 def Comment_function(request, article_id):

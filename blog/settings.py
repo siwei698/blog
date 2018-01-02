@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'w3ley9qwgd*8i$ubbp5^l1h3ib#o)gba@vzc3cka4md5g&lo#!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.119.128','localhost','127.0.0.1','www.osw.com']
+ALLOWED_HOSTS = ['39.106.194.186','localhost','127.0.0.1','siwei666.site']
 
 
 # Application definition
