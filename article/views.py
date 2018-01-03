@@ -162,18 +162,31 @@ def osw_article(request, article_id):
     leixing = Category.objects.get(id = myarticle.category_id)
     myarticle.clicked = myarticle.clicked + 1
     myarticle.save()
-    max_id = len(Article.objects.all())
-    if myarticle.id == 1:
-        previous_id = max_id
-        next_id = myarticle.id + 1
-    elif myarticle.id == max_id:
-        next_id = 1
-        previous_id = myarticle.id - 1
+#    max_id = len(Article.objects.all())
+#    if myarticle.id == 1:
+#        previous_id = max_id
+#        next_id = myarticle.id + 1
+#    elif myarticle.id == max_id:
+#        next_id = 1
+#        previous_id = myarticle.id - 1
+#    else:
+#        next_id = myarticle.id + 1
+#        previous_id = myarticle.id - 1
+#    nextarticle = Article.objects.get(id = next_id)
+#    previousarticle = Article.objects.get(id = previous_id)
+    allarticle = Article.objects.all()
+    articlenums = len(allarticle)
+    if myarticle == allarticle[0]:
+        nextarticle = allarticle[1]
+        previousarticle = allarticle[articlenums - 1]
+    elif myarticle == allarticle[articlenums - 1]:
+        nextarticle = allarticle[0]
+        previousarticle = allarticle[articlenums - 2]
     else:
-        next_id = myarticle.id + 1
-        previous_id = myarticle.id - 1
-    nextarticle = Article.objects.get(id = next_id)
-    previousarticle = Article.objects.get(id = previous_id)
+        tmp1 = Article.objects.filter(id__gt = article_id)
+        nextarticle = tmp1[0]
+        tmp2 = Article.objects.filter(id__lt = article_id)
+        previousarticle = tmp2[::-1][0]
     return render(request, 'osw_articlepage.html',{
         'all_tags':all_tags,
         'myarticle':myarticle,
